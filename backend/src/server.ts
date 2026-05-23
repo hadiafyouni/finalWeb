@@ -1,17 +1,12 @@
-import app from './app'
+import { buildApp } from './app';
 
-const start = async () => {
-  try {
-    await app.listen({
-      port: Number(process.env.PORT || 4000),
-      host: '0.0.0.0'
-    })
+const PORT = parseInt(process.env.PORT ?? '4000');
+const app = buildApp();
 
-    console.log('Backend running on port 4000')
-  } catch (err) {
-    console.error(err)
-    process.exit(1)
-  }
-}
+app.listen({ port: PORT, host: '0.0.0.0' }, (err, addr) => {
+  if (err) { app.log.error(err); process.exit(1); }
+  app.log.info(`🎓 Student Management API → ${addr}`);
+});
 
-start()
+process.on('SIGINT',  async () => { await app.close(); process.exit(0); });
+process.on('SIGTERM', async () => { await app.close(); process.exit(0); });
