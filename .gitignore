@@ -11,5 +11,5 @@ dist/
 next-env.d.ts
 
 # Root packages
-/package.json
-/package-lock.json
+package.json
+package-lock.json
