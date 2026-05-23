@@ -9,7 +9,5 @@ dist/
 .vscode/
 *.tsbuildinfo
 
-# Ignore package files across all directories as requested
-package.json
-package-lock.json
+
 
