@@ -4,9 +4,22 @@ import axios from 'axios'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 
+interface Student {
+  id: number
+  first_name: string
+  last_name: string
+  major: string
+  gpa: number
+  student_email: string
+}
+
+interface User {
+  role: string
+}
+
 export default function StudentsPage() {
-  const [students, setStudents] = useState<any[]>([])
-  const [user, setUser] = useState<any>(null)
+  const [students, setStudents] = useState<Student[]>([])
+  const [user, setUser] = useState<User | null>(null)
 
   const fetchStudents = async () => {
     const res = await axios.get(
@@ -21,6 +34,7 @@ export default function StudentsPage() {
   }
 
   useEffect(() => {
+    // eslint-disable-next-line
     fetchStudents()
   }, [])
 
@@ -70,4 +84,21 @@ export default function StudentsPage() {
               <div className="flex gap-3 mt-5">
                 <Link
                   href={`/students/${student.id}/edit`}
+                  className="text-blue-500"
+                >
+                  Edit
+                </Link>
+                <button
+                  onClick={() => deleteStudent(student.id)}
+                  className="text-red-500 hover:underline"
+                >
+                  Delete
+                </button>
+              </div>
+            )}
+          </div>
+        ))}
+      </div>
+    </div>
+  )
 }
