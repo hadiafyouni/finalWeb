@@ -1,0 +1,22 @@
+@import "tailwindcss";
+
+:root {
+  --navy:    #0f172a;
+  --navy2:   #1e293b;
+  --sky:     #0ea5e9;
+  --sky2:    #38bdf8;
+  --slate:   #64748b;
+  --border:  #e2e8f0;
+  --surface: #f8fafc;
+  --white:   #ffffff;
+  --red:     #ef4444;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; background: var(--surface); color: var(--navy2); font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+
+@keyframes spin { to { transform: rotate(360deg); } }
+.spin { animation: spin 0.7s linear infinite; }
+@keyframes fadein { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+.fadein { animation: fadein 0.25s ease both; }
