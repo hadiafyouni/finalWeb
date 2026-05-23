@@ -9,5 +9,6 @@ dist/
 .vscode/
 *.tsbuildinfo
 
-
-
+# Root packages only (keep frontend/ and backend/ packages tracked)
+/package.json
+/package-lock.json
