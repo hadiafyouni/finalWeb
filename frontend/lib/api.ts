@@ -1,4 +1,15 @@
-const BASE = (process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000').replace(/\/$/, '');
+const BASE_URL = process.env.NEXT_PUBLIC_API_URL;
+
+if (!BASE_URL) {
+  // This fires at build time if the variable is missing — you see it in
+  // Railway build logs immediately rather than getting a silent localhost error.
+  throw new Error(
+    'NEXT_PUBLIC_API_URL is not set. ' +
+    'Add it to the frontend service Variables tab in Railway before deploying.'
+  );
+}
+
+const BASE = BASE_URL.replace(/\/$/, '');
 
 export async function api<T>(
   path: string,
@@ -19,9 +30,12 @@ export async function api<T>(
   return data as T;
 }
 
-// Store token in sessionStorage as Authorization fallback for cross-domain
+// Stores the JWT in sessionStorage as a Bearer token fallback.
+// The httpOnly cookie handles auth for same-origin requests automatically.
+// The Bearer header covers cross-domain (different Railway subdomains in prod).
 export const tokenStore = {
-  get: () => (typeof window !== 'undefined' ? sessionStorage.getItem('jwt') ?? undefined : undefined),
+  get: (): string | undefined =>
+    typeof window !== 'undefined' ? sessionStorage.getItem('jwt') ?? undefined : undefined,
   set: (t: string) => sessionStorage.setItem('jwt', t),
   clear: () => sessionStorage.removeItem('jwt'),
 };

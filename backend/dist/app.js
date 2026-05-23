@@ -12,7 +12,7 @@ const cookie_1 = __importDefault(require("@fastify/cookie"));
 const rate_limit_1 = __importDefault(require("@fastify/rate-limit"));
 const dotenv_1 = __importDefault(require("dotenv"));
 const auth_routes_1 = __importDefault(require("./routes/auth.routes"));
-const student_routes_1 = __importDefault(require("./routes/student.routes"));
+const students_routes_1 = __importDefault(require("./routes/students.routes"));
 dotenv_1.default.config();
 const isProd = process.env.NODE_ENV === 'production';
 function buildApp() {
@@ -50,7 +50,7 @@ function buildApp() {
     });
     // ── Routes ──────────────────────────────────────────────────
     app.register(auth_routes_1.default, { prefix: '/api/auth' });
-    app.register(student_routes_1.default, { prefix: '/api/students' });
+    app.register(students_routes_1.default, { prefix: '/api/students' });
     // ── Health ──────────────────────────────────────────────────
     app.get('/health', async () => ({ status: 'ok', ts: new Date().toISOString() }));
     return app;

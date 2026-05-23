@@ -7,7 +7,7 @@ import rateLimit from '@fastify/rate-limit';
 import dotenv from 'dotenv';
 
 import authRoutes from './routes/auth.routes';
-import studentRoutes from './routes/student.routes';
+import studentRoutes from './routes/students.routes';
 
 dotenv.config();
 

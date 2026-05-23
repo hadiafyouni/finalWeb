@@ -1,0 +1,14 @@
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
+[phases.install]
+cmds = ["npm ci"]
+
+# NEXT_PUBLIC_* variables must be present at build time — Next.js bakes them
+# into the client bundle. Railway exposes service variables to the build phase
+# automatically when they are set in the service's Variables tab.
+[phases.build]
+cmds = ["npm run build"]
+
+[start]
+cmd = "npm run start"

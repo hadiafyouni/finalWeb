@@ -1,6 +1,6 @@
 import { FastifyInstance } from 'fastify';
 import { listStudents, getStudent, createStudent, editStudent, deleteStudent } from '../controllers/students.controller';
-import { requireAuth, requireAdmin } from '../auth';
+import { requireAuth, requireAdmin } from '../middleware/auth';
 
 export default async function studentRoutes(app: FastifyInstance) {
   // Any logged-in user can read
