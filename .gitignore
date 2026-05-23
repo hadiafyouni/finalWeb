@@ -9,3 +9,7 @@ dist/
 .vscode/
 *.tsbuildinfo
 next-env.d.ts
+
+# Root packages
+/package.json
+/package-lock.json
